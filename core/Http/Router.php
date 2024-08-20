@@ -21,21 +21,27 @@ class Router
     /**
      * Get route by name
      * @param string $name : route name
-     * @return Route|null
+     * @return Route
+     * @throws \Exception : if route not found
      */
-    public function getRoute(string $name): ?Route
+    public function getRoute(string $name): Route
     {
-        return $this->nameMap[$name] ?? null;
+        if (!isset($this->nameMap[$name]))
+            throw new \Exception("Route with name $name not found");
+        return $this->nameMap[$name];
     }
 
     /**
      * Get route by path
      * @param string $path : route path
-     * @return Route|null
+     * @return Route : route object
+     * @throws \Exception : if route not found
      */
-    public function getRouteByPath(string $path): ?Route
+    public function getRouteByPath(string $path): Route
     {
-        return $this->routes[$path] ?? null;
+        if (!isset($this->routes[$path]))
+            throw new \Exception("Route with path $path not found");
+        return $this->routes[$path];
     }
 
     /**

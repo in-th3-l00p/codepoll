@@ -85,6 +85,9 @@ class Route
      */
     public function handle(): void
     {
-        require CONTROLLER_BASE_PATH . $this->controller . ".php";
+        $path = explode(".", $this->controller);
+        for ($i = 0; $i < sizeof($path) - 1; $i++)
+            $path[$i] = ucfirst($path[$i]);
+        require CONTROLLER_BASE_PATH . implode("/", $path) . ".php";
     }
 }

@@ -6,6 +6,7 @@ use core\Http\Router;
 
 // application starting point
 // singleton
+// todo error handling
 class App
 {
     // singleton instance

@@ -11,6 +11,7 @@
   "author": "in-th3-l00p",
   "license": "ISC",
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
     "tailwindcss": "^3.4.10"
   }
 }
