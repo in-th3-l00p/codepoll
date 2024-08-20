@@ -2,8 +2,10 @@
 
 namespace core;
 
+use core\Http\Middleware;
 use core\Http\Router;
 use core\Database\Database;
+use core\Http\Session;
 
 // application starting point
 // singleton
@@ -43,8 +45,15 @@ class App
     public function __construct()
     {
         Container::initialize();
+        Session::initialize();
+        Container::get()->bind("middleware", new Middleware());
         Container::get()->bind("router", new Router());
         Container::get()->bind("database", new Database());
+
+        Container::get()->resolve("middleware")
+            ->add(fn () => Session::setHidden("back_url", $_SERVER["REQUEST_URI"]))
+            ->add(fn () => Container::get()->resolve("router")->resolve())
+            ->add(fn () => Session::flash());
     }
 
     /**
@@ -77,6 +86,6 @@ class App
     public function run()
     {
         require BASE_PATH . "/app/routes.php";
-        $this->getRouter()->handle();
+        Container::get()->resolve("middleware")->run();
     }
 }

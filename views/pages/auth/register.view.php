@@ -19,13 +19,14 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm md:max-w-lg">
-        <form class="space-y-6" action="#" method="POST">
+        <form class="space-y-6" action="<?= route("register.submit") ?>" method="POST">
             <div class="pb-6 border-b">
                 <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
                 <div class="mt-2">
                     <input id="username" name="username" type="text" autocomplete="username" required
                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
+                <?php formError("username") ?>
             </div>
 
             <div>
@@ -34,6 +35,7 @@
                     <input id="email" name="email" type="email" autocomplete="email" required
                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
+                <?php formError("email") ?>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-6 border-b">
@@ -43,6 +45,7 @@
                         <input id="first_name" name="first_name" type="text" autocomplete="first_name" required
                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
+                    <?php formError("first_name") ?>
                 </div>
 
                 <div>
@@ -51,6 +54,7 @@
                         <input id="last_name" name="last_name" type="text" autocomplete="last_name" required
                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
+                    <?php formError("last_name") ?>
                 </div>
             </div>
 
@@ -62,6 +66,7 @@
                     <input id="password" name="password" type="password" autocomplete="current-password" required
                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
+                <?php formError("password") ?>
             </div>
 
             <div class="pb-6">
@@ -72,6 +77,7 @@
                     <input id="password_confirmed" name="password_confirmed" type="password" autocomplete="current-password_confirmed" required
                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
+                <?php formError("password_confirmed") ?>
             </div>
 
             <div>

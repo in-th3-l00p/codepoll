@@ -80,10 +80,10 @@ class Route
     }
 
     /**
-     * Handle the route
+     * Resolves the route
      * @return void
      */
-    public function handle(): void
+    public function resolve(): void
     {
         $path = explode(".", $this->controller);
         for ($i = 0; $i < sizeof($path) - 1; $i++)

@@ -52,9 +52,9 @@ class Router
     }
 
     /**
-     * Handle the request
+     * Resolves the request
      */
-    public function handle(): void
+    public function resolve(): void
     {
         $url = parse_url($_SERVER['REQUEST_URI']);
         $method = $_POST["_method"] ?? $_SERVER['REQUEST_METHOD'];
@@ -74,7 +74,7 @@ class Router
         }
         try {
             $route = $this->getRouteByPathAndMethod($url["path"], $method);
-            $route->handle();
+            $route->resolve();
         } catch (\Exception) {
             notFound();
         }
