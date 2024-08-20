@@ -1,0 +1,16 @@
+{
+  "name": "codepoll",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tailwindcss -i ./public/styles/tailwind.css -o ./public/app.css --watch",
+    "build": "tailwindcss -i ./public/styles/tailwind.css -o ./public/app.css"
+  },
+  "keywords": [],
+  "author": "in-th3-l00p",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.10"
+  }
+}
