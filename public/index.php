@@ -31,9 +31,22 @@
         // running the app
         try {
             App::initialize();
+
+            dd(App::getInstance()->getDatabase()->getPDO()
+                ->prepare("INSERT INTO users (username, email, first_name, last_name, description, pfp_path, password, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
+                ->execute([
+                    "ben",
+                    "ben@example.com",
+                    "Ben",
+                    "Helped",
+                    "I am a helper",
+                    "pfp.jpg",
+                    password_hash("password", PASSWORD_DEFAULT),
+                    date("Y-m-d H:i:s")
+                ]));
             App::getInstance()->run();
         } catch (Exception $e) {
-            echo "failed to start the app have no idea why";
+            echo "ben helped error: " . $e->getMessage();
         }
     ?>
 </body>
