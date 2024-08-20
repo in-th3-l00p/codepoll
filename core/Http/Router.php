@@ -57,7 +57,7 @@ class Router
     public function handle(): void
     {
         $url = parse_url($_SERVER['REQUEST_URI']);
-        $method = $_POST["_method"] || $_SERVER['REQUEST_METHOD'];
+        $method = $_POST["_method"] ?? $_SERVER['REQUEST_METHOD'];
         switch ($method) {
             case "GET":
                 $method = Method::GET;
