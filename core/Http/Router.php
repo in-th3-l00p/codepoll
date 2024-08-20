@@ -2,10 +2,7 @@
 
 namespace core\Http;
 
-
 // application's main router
-use function core\Utils\notFound;
-
 class Router
 {
     private $routes = [];

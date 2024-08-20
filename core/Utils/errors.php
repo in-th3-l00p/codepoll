@@ -1,7 +1,5 @@
 <?php
 
-namespace core\Utils;
-
 function abort(int $code) {
     view("errors.{$code}");
     die($code);
