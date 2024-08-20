@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tailwindcss -i ./public/styles/tailwind.css -o ./public/app.css --watch",
-    "build": "tailwindcss -i ./public/styles/tailwind.css -o ./public/app.css"
+    "dev": "tailwindcss -i ./public/styles/tailwind.css -o ./public/styles/app.css --watch",
+    "build": "tailwindcss -i ./public/styles/tailwind.css -o ./public/styles/app.css"
   },
   "keywords": [],
   "author": "in-th3-l00p",

@@ -31,6 +31,7 @@ class App
         return self::$instance;
     }
 
+    // app's logics
     private Router $router;
 
     /**
