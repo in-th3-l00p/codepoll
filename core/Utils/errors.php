@@ -2,7 +2,8 @@
 
 function abort(int $code) {
     view("errors.{$code}");
-    die($code);
+    http_response_code($code);
+    die();
 }
 
 function notFound() {
