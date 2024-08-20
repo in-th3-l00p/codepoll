@@ -1,3 +1,5 @@
 <?php
 
-echo "Hello from index controller!";
+use function core\Utils\view;
+
+view('index');
