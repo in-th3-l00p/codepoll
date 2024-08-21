@@ -146,4 +146,25 @@ class Session
     {
         unset($_SESSION[HIDDEN_KEY][$key]);
     }
+
+    /**
+     * Retrieves an error message from the session.
+     * @param string $key The key of the error message
+     * @return string|null The error message or null if the key does not exist
+     */
+    public static function getError(string $key): ?string
+    {
+        return $_SESSION["errors"][$key] ?? null;
+    }
+
+    /**
+     * Sets an error message in the session.
+     * @param string $key The key of the error message
+     * @param string $value The value of the error message
+     * @return void
+     */
+    public static function setError(string $key, string $value): void
+    {
+        self::setFlash($key, $value);
+    }
 }

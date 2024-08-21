@@ -11,11 +11,34 @@ const PASSWORD_ERRORS = [
 ];
 
 class Validator {
+    public static function unique(
+        string $field,
+        string $value,
+        string $tableField
+    ): ?string {
+        $tableField = explode(".", $tableField);
+        if (sizeof($tableField) !== 2)
+            throw new \Exception("Invalid table field format.");
+
+        $sql = \core\App::getInstance()
+            ->getDatabase()
+            ->getPDO()
+            ->prepare("SELECT COUNT(*) as count FROM $tableField[0] WHERE $tableField[1] = :value");
+        $sql->bindParam(":value", $value);
+        $sql->execute();
+        $count = $sql->fetch(\PDO::FETCH_ASSOC)["count"];
+        if ($count > 0)
+            return "$field is already taken.";
+        return null;
+    }
+
     public static function validateEmail(string $email): ?string
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))
             return "Invalid email address.";
-        return null;
+        if (strlen(trim($email)) > 255)
+            return "Email must be at most 255 characters long.";
+        return self::unique("Email", $email, "users.email");
     }
 
     public static function validatePassword(string $password): ?string {
@@ -31,7 +54,7 @@ class Validator {
             return "Username must be at least 3 characters long.";
         if (strlen(trim($username)) > 255)
             return "Username must be at most 255 characters long.";
-        return null;
+        return self::unique("Username", $username, "users.username");
     }
 
     public static function validateName(string $name): ?string {
@@ -74,14 +97,21 @@ class Validator {
      * Validate request data using rules.
      * @throws \Exception if validation rule does not exist
      * @param array $rules Associative array where key is the field name and value is the validation rule.
-     * @return void
+     * @return \stdClass Object containing validated data.
      */
     #[NoReturn]
-    public static function validateRequest(array $rules): void
+    public static function validateRequest(array $rules): \stdClass
     {
-        $errors = self::validateRules(array_merge($_GET, $_POST), $rules);
-        Session::setFlash("errors", $errors);
-        header("Location: " . Session::getHidden("back_url"));
-        exit();
+        $request = array_merge($_GET, $_POST);
+        $errors = self::validateRules($request, $rules);
+        if (!empty($errors)) {
+            Session::setFlash("errors", $errors);
+            back();
+        }
+
+        $data = [];
+        foreach (array_keys($rules) as $key)
+            $data[$key] = $request[$key];
+        return (object) $data;
     }
 }

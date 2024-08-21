@@ -28,3 +28,15 @@ function formError(string $error_key): void
         ]);
     }
 }
+
+/**
+ * Display success message if it exists.
+ * @return void
+ */
+function formSuccess(): void {
+    if (Session::has("success")) {
+        component("success-alert", [
+            "message" => Session::get("success")
+        ]);
+    }
+}

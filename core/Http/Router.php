@@ -72,11 +72,13 @@ class Router
                 $method = Method::DELETE;
                 break;
         }
+
+        $route = null;
         try {
             $route = $this->getRouteByPathAndMethod($url["path"], $method);
-            $route->resolve();
         } catch (\Exception) {
             notFound();
         }
+        $route->resolve();
     }
 }

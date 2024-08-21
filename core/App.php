@@ -50,8 +50,11 @@ class App
         Container::get()->bind("router", new Router());
         Container::get()->bind("database", new Database());
 
+        $this->getDatabase()
+            ->getPDO()
+            ->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
         Container::get()->resolve("middleware")
-            ->add(fn () => Session::setHidden("back_url", $_SERVER["REQUEST_URI"]))
             ->add(fn () => Container::get()->resolve("router")->resolve())
             ->add(fn () => Session::flash());
     }
